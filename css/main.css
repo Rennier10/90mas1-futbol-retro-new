@@ -1,0 +1,182 @@
+/* ─── Base ────────────────────────────────────────────────── */
+body {
+  font-family: var(--ff-body);
+  background-color: var(--clr-bg);
+  color: var(--clr-white);
+  line-height: 1.6;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-md);
+  background: var(--clr-gold);
+  color: #000;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  z-index: calc(var(--z-preload) + 1);
+  transition: top var(--dur-fast);
+}
+.skip-link:focus { top: var(--space-sm); }
+
+/* ─── Buttons ─────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--ff-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: transform var(--dur-fast) var(--ease-spring),
+              box-shadow var(--dur-fast),
+              background var(--dur-fast),
+              color var(--dur-fast);
+  position: relative;
+  overflow: hidden;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,.08);
+  opacity: 0;
+  transition: opacity var(--dur-fast);
+}
+.btn:hover::after { opacity: 1; }
+.btn:active { transform: scale(0.97); }
+.btn:focus-visible {
+  outline: 2px solid var(--clr-gold);
+  outline-offset: 3px;
+}
+
+.btn--primary {
+  background: var(--clr-gold);
+  color: #000;
+  box-shadow: 0 4px 16px rgba(245,166,35,.35);
+}
+.btn--primary:hover {
+  box-shadow: 0 6px 24px rgba(245,166,35,.5);
+  transform: translateY(-2px);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--clr-gold);
+  border: 1.5px solid var(--clr-gold);
+}
+.btn--outline:hover {
+  background: rgba(245,166,35,.1);
+  transform: translateY(-2px);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--clr-white);
+  border: 1.5px solid var(--clr-border);
+}
+.btn--ghost:hover {
+  border-color: var(--clr-gold);
+  color: var(--clr-gold);
+}
+
+/* ─── Ticker / Marquee ───────────────────────────────────── */
+.ticker {
+  background: var(--clr-gold);
+  color: #000;
+  padding: 0.6rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ticker__track {
+  display: inline-block;
+  animation: tickerMove 35s linear infinite;
+  font-family: var(--ff-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.ticker__sep {
+  margin: 0 1.5rem;
+  opacity: 0.5;
+}
+@keyframes tickerMove {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker__track { animation: none; }
+}
+
+/* ─── Toast ───────────────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: var(--space-xl);
+  left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  background: var(--clr-surface-2);
+  color: var(--clr-white);
+  border: 1px solid var(--clr-gold);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1.5rem;
+  font-family: var(--ff-heading);
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  z-index: var(--z-toast);
+  transition: transform var(--dur-slow) var(--ease-out);
+  pointer-events: none;
+  box-shadow: var(--shadow-gold);
+}
+.toast--visible {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ─── Custom cursor ───────────────────────────────────────── */
+@media (pointer: fine) {
+  body { cursor: none; }
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--clr-gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: var(--z-cursor);
+    transform: translate(-50%, -50%);
+    transition: transform var(--dur-fast) var(--ease-out),
+                width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: difference;
+  }
+  .cursor-follower {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--clr-gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: calc(var(--z-cursor) - 1);
+    transform: translate(-50%, -50%);
+    transition: transform 0.12s var(--ease-out),
+                width 0.3s, height 0.3s, opacity 0.3s;
+    opacity: 0.6;
+  }
+  body:has(.btn:hover) .cursor-follower,
+  body:has(a:hover) .cursor-follower {
+    width: 52px; height: 52px;
+    opacity: 0.4;
+  }
+}
+
+/* ─── Page transitions ───────────────────────────────────── */
+.page-transition {
+  position: fixed;
+  inset: 0;
+  background: var(--clr-bg);
+  transform: translateY(100%);
+  z-index: calc(var(--z-preload) - 1);
+  pointer-events: none;
+}

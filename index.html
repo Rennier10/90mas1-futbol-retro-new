@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>90+1 Fútbol Retro & New</title>
+  <meta name="description" content="Tienda oficial de camisetas de fútbol retro y actuales, guayos y accesorios. Entra al camerino." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js" defer></script>
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/hero.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/locker.css" />
+  <link rel="stylesheet" href="css/product-modal.css" />
+  <link rel="stylesheet" href="css/cart.css" />
+  <link rel="stylesheet" href="css/sections.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       PRELOADER
+  ═══════════════════════════════════════════ -->
+  <div id="preloader" class="preloader" aria-hidden="true">
+    <div class="preloader__scoreboard">
+      <div class="preloader__led">90<span class="preloader__plus">+</span><span class="preloader__one" id="preloaderOne">1</span></div>
+      <div class="preloader__brand">FÚTBOL <span>RETRO &amp; NEW</span></div>
+      <div class="preloader__bar"><div class="preloader__fill" id="preloaderFill"></div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       CURSOR PERSONALIZADO
+  ═══════════════════════════════════════════ -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-follower" id="cursorFollower" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════
+       NAV
+  ═══════════════════════════════════════════ -->
+  <header class="nav" id="nav" role="banner">
+    <a href="index.html" class="nav__logo" aria-label="Inicio 90+1">
+      <div class="nav__logo-board">
+        <span class="nav__logo-num">90<em>+1</em></span>
+      </div>
+      <span class="nav__logo-text">FÚTBOL<br><small>RETRO &amp; NEW</small></span>
+    </a>
+
+    <nav class="nav__links" role="navigation" aria-label="Navegación principal">
+      <a href="index.html" class="nav__link nav__link--active">Inicio</a>
+      <a href="pages/catalog.html" class="nav__link">Catálogo</a>
+      <a href="pages/nosotros.html" class="nav__link">Nosotros</a>
+      <a href="pages/contacto.html" class="nav__link">Contacto</a>
+    </nav>
+
+    <div class="nav__actions">
+      <button class="nav__search-btn" aria-label="Buscar" id="searchBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <button class="nav__cart-btn" aria-label="Carrito de compras" id="cartBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="nav__cart-count" id="cartCount" aria-live="polite">0</span>
+      </button>
+      <button class="nav__menu-btn" aria-label="Abrir menú" id="menuBtn" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menú móvil" hidden>
+    <a href="index.html" class="mobile-menu__link">Inicio</a>
+    <a href="pages/catalog.html" class="mobile-menu__link">Catálogo</a>
+    <a href="pages/nosotros.html" class="mobile-menu__link">Nosotros</a>
+    <a href="pages/contacto.html" class="mobile-menu__link">Contacto</a>
+  </div>
+
+  <main id="main-content">
+
+    <!-- ═══════════════════════════════════════════
+         HERO — SCOREBOARD ANIMADO
+    ═══════════════════════════════════════════ -->
+    <section class="hero" id="hero" aria-label="Hero — Entra al camerino">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__lockers">
+          <div class="hero__locker" style="--i:1"></div>
+          <div class="hero__locker" style="--i:2"></div>
+          <div class="hero__locker" style="--i:3"></div>
+          <div class="hero__locker" style="--i:4"></div>
+          <div class="hero__locker" style="--i:5"></div>
+        </div>
+        <div class="hero__floor"></div>
+        <div class="hero__bench"></div>
+        <div class="hero__light hero__light--1"></div>
+        <div class="hero__light hero__light--2"></div>
+        <div class="hero__light hero__light--3"></div>
+      </div>
+
+      <div class="hero__content">
+        <div class="hero__scoreboard" aria-hidden="true">
+          <div class="hero__sb-led">
+            <span class="hero__sb-num" id="heroNum1">9</span><span class="hero__sb-num" id="heroNum2">0</span>
+            <span class="hero__sb-plus">+</span>
+            <span class="hero__sb-extra" id="heroExtra">1</span>
+          </div>
+          <div class="hero__sb-label">FÚTBOL <span>RETRO &amp; NEW</span></div>
+          <div class="hero__sb-meta">
+            <span>FIFA APPROVED</span>
+            <span>TIME ADDED</span>
+          </div>
+          <div class="hero__sb-controls" aria-hidden="true">
+            <span class="hero__sb-btn">FIFA</span>
+            <span class="hero__sb-dot hero__sb-dot--green"></span>
+            <span class="hero__sb-btn">ON</span>
+            <span class="hero__sb-btn hero__sb-btn--active">OFF</span>
+            <span class="hero__sb-btn">ENTER</span>
+            <span class="hero__sb-arrow">◀</span>
+            <span class="hero__sb-arrow">▶</span>
+            <span class="hero__sb-dot hero__sb-dot--green"></span>
+            <span class="hero__sb-dot hero__sb-dot--red"></span>
+            <span class="hero__sb-label2">TIME ADDED</span>
+          </div>
+        </div>
+
+        <div class="hero__copy">
+          <h1 class="hero__title">
+            <span class="hero__title-line" id="heroLine1">EL CAMERINO</span>
+            <span class="hero__title-line" id="heroLine2">TE ESPERA</span>
+          </h1>
+          <p class="hero__sub" id="heroSub">Camisetas retro &amp; actuales. Guayos de leyenda.<br>Historia y presente del fútbol en un solo lugar.</p>
+          <div class="hero__ctas">
+            <a href="#locker" class="btn btn--primary hero__cta" id="heroCta1">Entrar al Camerino</a>
+            <a href="pages/catalog.html" class="btn btn--outline hero__cta" id="heroCta2">Ver Catálogo</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__scroll-hint" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="hero__scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         TICKER — BANDA DESLIZANTE
+    ═══════════════════════════════════════════ -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span>Barcelona 2024/25</span><span class="ticker__sep">●</span>
+        <span>Real Madrid Retro 1998</span><span class="ticker__sep">●</span>
+        <span>Manchester United Final Moscú</span><span class="ticker__sep">●</span>
+        <span>Argentina Retro 1994</span><span class="ticker__sep">●</span>
+        <span>Brasil Copa del Mundo 2002</span><span class="ticker__sep">●</span>
+        <span>Atlético de Madrid 2024</span><span class="ticker__sep">●</span>
+        <span>Arsenal 2024/25</span><span class="ticker__sep">●</span>
+        <span>Manchester City Etihad</span><span class="ticker__sep">●</span>
+        <span>Inter Milano Nerazzurri</span><span class="ticker__sep">●</span>
+        <span>Nápoles Centenario</span><span class="ticker__sep">●</span>
+        <span>AC Milan Opel 1996</span><span class="ticker__sep">●</span>
+        <span>Colombia Umbro #10</span><span class="ticker__sep">●</span>
+        <!-- duplicate for seamless loop -->
+        <span>Barcelona 2024/25</span><span class="ticker__sep">●</span>
+        <span>Real Madrid Retro 1998</span><span class="ticker__sep">●</span>
+        <span>Manchester United Final Moscú</span><span class="ticker__sep">●</span>
+        <span>Argentina Retro 1994</span><span class="ticker__sep">●</span>
+        <span>Brasil Copa del Mundo 2002</span><span class="ticker__sep">●</span>
+        <span>Atlético de Madrid 2024</span><span class="ticker__sep">●</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         LOCKER ROOM — CAMERINO INTERACTIVO
+    ═══════════════════════════════════════════ -->
+    <section class="locker-section" id="locker" aria-label="Camerino — elige tu prenda">
+      <div class="locker-section__header reveal-up">
+        <div class="locker-section__tag">— El Camerino —</div>
+        <h2 class="locker-section__title">Elige tu prenda</h2>
+        <p class="locker-section__sub">Toca cualquier prenda para ver el detalle, precio y agregarla al carrito.</p>
+      </div>
+
+      <!-- Tabs de categoría -->
+      <div class="locker-tabs" role="tablist" aria-label="Categorías de producto">
+        <button class="locker-tab locker-tab--active" role="tab" aria-selected="true" data-tab="retro">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          Retro
+        </button>
+        <button class="locker-tab" role="tab" aria-selected="false" data-tab="modern">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          Actuales
+        </button>
+        <button class="locker-tab" role="tab" aria-selected="false" data-tab="boots">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/></svg>
+          Guayos
+        </button>
+      </div>
+
+      <!-- Perchero Retro -->
+      <div class="rack-panel rack-panel--active" id="tab-retro" role="tabpanel" aria-label="Camisetas retro">
+        <div class="rack" aria-label="Perchero retro">
+          <div class="rack__rod" aria-hidden="true"></div>
+          <div class="rack__items" id="rackRetro"></div>
+        </div>
+      </div>
+
+      <!-- Perchero Actuales -->
+      <div class="rack-panel" id="tab-modern" role="tabpanel" aria-label="Camisetas actuales" hidden>
+        <div class="rack" aria-label="Perchero actuales">
+          <div class="rack__rod" aria-hidden="true"></div>
+          <div class="rack__items" id="rackModern"></div>
+        </div>
+      </div>
+
+      <!-- Perchero Guayos -->
+      <div class="rack-panel" id="tab-boots" role="tabpanel" aria-label="Guayos" hidden>
+        <div class="boots-shelf" id="bootsShelf"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION — HIGHLIGHTS / FEATURED
+    ═══════════════════════════════════════════ -->
+    <section class="highlights" aria-label="Destacados">
+      <div class="highlights__inner">
+        <div class="highlights__card reveal-left" data-delay="0">
+          <div class="highlights__icon">🏆</div>
+          <h3>Auténticas</h3>
+          <p>Réplicas y originales de las temporadas más icónicas del fútbol mundial.</p>
+        </div>
+        <div class="highlights__card reveal-up" data-delay="0.1">
+          <div class="highlights__icon">⚡</div>
+          <h3>Envío Express</h3>
+          <p>Despacho en 24 h a todo el país. Empaque coleccionista sin costo adicional.</p>
+        </div>
+        <div class="highlights__card reveal-right" data-delay="0.2">
+          <div class="highlights__icon">🎽</div>
+          <h3>Personalización</h3>
+          <p>Nombre y número de tu ídolo o el tuyo propio. Estampado profesional.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION — FEATURED JERSEY (PARALLAX)
+    ═══════════════════════════════════════════ -->
+    <section class="featured-jersey" aria-label="Camiseta destacada">
+      <div class="featured-jersey__bg" aria-hidden="true">
+        <div class="featured-jersey__particles" id="featuredParticles"></div>
+      </div>
+      <div class="featured-jersey__content">
+        <div class="featured-jersey__meta reveal-left">
+          <div class="featured-jersey__eyebrow">★ MÁS VENDIDA ★</div>
+          <h2 class="featured-jersey__title">Real Madrid<br><span>Retro 1998</span></h2>
+          <p class="featured-jersey__desc">La temporada del doblete. La camiseta que vistió a Raúl, Morientes y Hierro en la conquista de la octava. Tejido clásico, parche de Champions League, detalles en dorado.</p>
+          <div class="featured-jersey__price">
+            <span class="featured-jersey__price-label">Desde</span>
+            <span class="featured-jersey__price-num">$189.900</span>
+            <span class="featured-jersey__price-currency">COP</span>
+          </div>
+          <button class="btn btn--primary" id="featuredAddBtn" data-id="retro-realmadrid-1998">
+            Agregar al carrito
+          </button>
+        </div>
+        <div class="featured-jersey__visual reveal-right">
+          <div class="jersey-hanger featured-jersey__hanger" aria-hidden="true">
+            <div class="jersey-hanger__hook"></div>
+            <div class="jersey-hanger__bar"></div>
+            <div class="jersey-hanger__jersey jersey-hanger__jersey--featured" id="featuredJersey">
+              <!-- SVG inline Real Madrid 98 -->
+              <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" aria-label="Camiseta Real Madrid Retro 1998">
+                <!-- Cuerpo -->
+                <path d="M55 60 Q40 55 25 70 L15 110 Q30 105 45 115 L45 220 Q45 230 55 230 L145 230 Q155 230 155 220 L155 115 Q170 105 185 110 L175 70 Q160 55 145 60 Q130 50 100 48 Q70 50 55 60Z" fill="#f5f5f0" stroke="#ccc" stroke-width="1"/>
+                <!-- Cuello V -->
+                <path d="M85 60 L100 80 L115 60" fill="none" stroke="#1a1a3e" stroke-width="4" stroke-linecap="round"/>
+                <!-- Cuello band -->
+                <path d="M55 60 Q70 50 100 48 Q130 50 145 60" fill="none" stroke="#c8a84b" stroke-width="5" stroke-linecap="round"/>
+                <!-- Stripes Adidas left -->
+                <line x1="58" y1="66" x2="48" y2="118" stroke="#c8a84b" stroke-width="4" opacity="0.9"/>
+                <line x1="66" y1="64" x2="56" y2="118" stroke="#c8a84b" stroke-width="4" opacity="0.9"/>
+                <line x1="74" y1="62" x2="64" y2="118" stroke="#c8a84b" stroke-width="4" opacity="0.9"/>
+                <!-- Stripes Adidas right -->
+                <line x1="142" y1="66" x2="152" y2="118" stroke="#c8a84b" stroke-width="4" opacity="0.9"/>
+                <line x1="134" y1="64" x2="144" y2="118" stroke="#c8a84b" stroke-width="4" opacity="0.9"/>
+                <line x1="126" y1="62" x2="136" y2="118" stroke="#c8a84b" stroke-width="4" opacity="0.9"/>
+                <!-- Escudo -->
+                <circle cx="78" cy="90" r="12" fill="#1a1a3e"/>
+                <text x="78" y="94" text-anchor="middle" fill="#c8a84b" font-size="8" font-weight="bold">RM</text>
+                <!-- Sponsor TEKA -->
+                <rect x="62" y="128" width="76" height="22" rx="2" fill="#1a1a3e"/>
+                <text x="100" y="143" text-anchor="middle" fill="white" font-size="13" font-weight="bold" font-family="Arial">Teka</text>
+                <!-- Adidas logo area -->
+                <text x="122" y="90" text-anchor="middle" fill="#888" font-size="7">adidas</text>
+                <!-- Light sheen -->
+                <path d="M70 65 Q80 68 85 120 Q75 115 70 65Z" fill="white" opacity="0.15"/>
+                <!-- Sleeve left -->
+                <path d="M25 70 L15 110 Q30 105 45 115 L45 95 Q35 85 25 70Z" fill="#f0f0ea" stroke="#ccc" stroke-width="1"/>
+                <!-- Sleeve right -->
+                <path d="M175 70 L185 110 Q170 105 155 115 L155 95 Q165 85 175 70Z" fill="#f0f0ea" stroke="#ccc" stroke-width="1"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         BRANDS STRIP
+    ═══════════════════════════════════════════ -->
+    <section class="brands" aria-label="Marcas disponibles">
+      <div class="brands__inner reveal-up">
+        <span class="brands__label">Marcas disponibles</span>
+        <div class="brands__logos">
+          <span class="brands__logo">Nike</span>
+          <span class="brands__sep">·</span>
+          <span class="brands__logo">Adidas</span>
+          <span class="brands__sep">·</span>
+          <span class="brands__logo">Puma</span>
+          <span class="brands__sep">·</span>
+          <span class="brands__logo">Umbro</span>
+          <span class="brands__sep">·</span>
+          <span class="brands__logo">EA7</span>
+          <span class="brands__sep">·</span>
+          <span class="brands__logo">Lotto</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <div class="footer__logo">
+          <span class="footer__logo-num">90<em>+1</em></span>
+          <span class="footer__logo-text">FÚTBOL<br><small>RETRO &amp; NEW</small></span>
+        </div>
+        <p class="footer__tagline">La historia del fútbol,<br>puesta en tu espalda.</p>
+      </div>
+      <nav class="footer__nav" aria-label="Pie de página">
+        <div class="footer__col">
+          <h4>Tienda</h4>
+          <a href="pages/catalog.html">Catálogo</a>
+          <a href="pages/catalog.html?cat=retro">Retro</a>
+          <a href="pages/catalog.html?cat=modern">Actuales</a>
+          <a href="pages/catalog.html?cat=boots">Guayos</a>
+        </div>
+        <div class="footer__col">
+          <h4>Nosotros</h4>
+          <a href="pages/nosotros.html">Quiénes somos</a>
+          <a href="pages/nosotros.html#guia">Guía de marca</a>
+          <a href="pages/contacto.html">Contacto</a>
+        </div>
+        <div class="footer__col">
+          <h4>Legal</h4>
+          <a href="#">Términos de uso</a>
+          <a href="#">Política de devoluciones</a>
+          <a href="#">Créditos de imágenes</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2025 90+1 Fútbol Retro &amp; New. Proyecto académico — Diseño de Interfaces &amp; Motion Design.</p>
+      <p class="footer__credits">Imágenes: <a href="https://www.planetafobal.com" target="_blank" rel="noopener">planetafobal.com</a> (referencia visual). Fuentes: Google Fonts. Animaciones: GSAP.</p>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════
+       PRODUCT MODAL
+  ═══════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-label="Detalle de producto" hidden>
+    <div class="modal" id="modal">
+      <button class="modal__close" id="modalClose" aria-label="Cerrar detalle">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="modal__inner">
+        <div class="modal__visual" id="modalVisual">
+          <!-- Jersey hanger injected by JS -->
+        </div>
+        <div class="modal__info">
+          <div class="modal__badge" id="modalBadge">Retro</div>
+          <h2 class="modal__title" id="modalTitle">—</h2>
+          <div class="modal__meta" id="modalMeta"></div>
+          <p class="modal__desc" id="modalDesc">—</p>
+          <div class="modal__price-row">
+            <span class="modal__price" id="modalPrice">—</span>
+            <span class="modal__stock" id="modalStock">En stock</span>
+          </div>
+          <div class="modal__sizes" id="modalSizes" aria-label="Tallas disponibles"></div>
+          <div class="modal__actions">
+            <button class="btn btn--primary modal__add-btn" id="modalAddBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              Agregar al carrito
+            </button>
+            <button class="btn btn--outline modal__wish-btn" aria-label="Guardar en favoritos">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       CART DRAWER
+  ═══════════════════════════════════════════ -->
+  <div class="cart-overlay" id="cartOverlay" hidden aria-hidden="true"></div>
+  <aside class="cart-drawer" id="cartDrawer" role="complementary" aria-label="Carrito de compras" hidden>
+    <div class="cart-drawer__header">
+      <h2 class="cart-drawer__title">Tu Carrito</h2>
+      <span class="cart-drawer__count" id="cartDrawerCount">0 items</span>
+      <button class="cart-drawer__close" id="cartDrawerClose" aria-label="Cerrar carrito">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="cart-drawer__body" id="cartDrawerBody">
+      <div class="cart-empty" id="cartEmpty">
+        <div class="cart-empty__icon">🛒</div>
+        <p>Tu carrito está vacío.</p>
+        <a href="pages/catalog.html" class="btn btn--outline">Ver catálogo</a>
+      </div>
+      <ul class="cart-items" id="cartItems" aria-label="Productos en el carrito"></ul>
+    </div>
+    <div class="cart-drawer__footer" id="cartFooter" hidden>
+      <div class="cart-drawer__subtotal">
+        <span>Subtotal</span>
+        <span id="cartSubtotal">$0</span>
+      </div>
+      <a href="pages/cart.html" class="btn btn--primary cart-drawer__checkout">Ver carrito completo</a>
+    </div>
+  </aside>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/locker.js"></script>
+  <script src="js/modal.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contacto — 90+1 Fútbol Retro & New</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/reset.css"/>
+  <link rel="stylesheet" href="../css/variables.css"/>
+  <link rel="stylesheet" href="../css/main.css"/>
+  <link rel="stylesheet" href="../css/nav.css"/>
+  <link rel="stylesheet" href="../css/footer.css"/>
+  <link rel="stylesheet" href="../css/animations.css"/>
+  <link rel="stylesheet" href="../css/cart.css"/>
+  <style>
+    .contact-hero {
+      padding: calc(var(--nav-h) + var(--space-4xl)) var(--space-xl) var(--space-3xl);
+      text-align: center; background: var(--clr-bg);
+      position: relative; overflow: hidden;
+    }
+    .contact-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(245,166,35,.04) 0%, transparent 60%);
+    }
+    .contact-hero__eyebrow { font-family: var(--ff-heading); font-size: 0.75rem; letter-spacing: 0.25em; color: var(--clr-gold); text-transform: uppercase; margin-bottom: var(--space-sm); position: relative; }
+    .contact-hero__title   { font-family: var(--ff-display); font-size: clamp(3rem, 7vw, 6rem); position: relative; }
+    .contact-hero__sub     { color: var(--clr-muted); max-width: 480px; margin: var(--space-md) auto 0; line-height: 1.6; position: relative; }
+
+    .contact-section {
+      padding: var(--space-3xl) var(--space-xl);
+      max-width: 900px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3xl); align-items: start;
+    }
+    /* Form */
+    .contact-form { display: flex; flex-direction: column; gap: var(--space-md); }
+    .contact-form__title { font-family: var(--ff-heading); font-size: 1.1rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: var(--space-sm); color: var(--clr-gold); }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-family: var(--ff-heading); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clr-muted); }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--clr-surface); border: 1.5px solid var(--clr-border); color: var(--clr-white);
+      border-radius: var(--radius-sm); padding: 0.75rem 1rem;
+      font-family: var(--ff-body); font-size: 0.9rem;
+      transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--clr-gold); box-shadow: 0 0 0 3px rgba(245,166,35,.12); }
+    .form-group textarea { min-height: 120px; resize: vertical; }
+    .form-group select option { background: var(--clr-surface); }
+    .contact-form__submit { margin-top: var(--space-sm); }
+    .contact-form__notice { font-size: 0.75rem; color: var(--clr-muted); line-height: 1.5; }
+    .contact-form__success {
+      display: none; padding: var(--space-lg);
+      background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.2);
+      border-radius: var(--radius-md); text-align: center;
+    }
+    .contact-form__success.visible { display: block; }
+    .contact-form__success h3 { font-family: var(--ff-heading); font-size: 1.1rem; font-weight: 700; text-transform: uppercase; margin-bottom: var(--space-sm); color: var(--clr-green); }
+
+    /* Info */
+    .contact-info { display: flex; flex-direction: column; gap: var(--space-xl); }
+    .contact-info__title { font-family: var(--ff-heading); font-size: 1.1rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: var(--space-sm); color: var(--clr-gold); }
+    .contact-info__item { display: flex; gap: var(--space-md); align-items: flex-start; padding: var(--space-md); background: var(--clr-surface); border: 1px solid var(--clr-border); border-radius: var(--radius-md); transition: border-color var(--dur-mid); }
+    .contact-info__item:hover { border-color: rgba(245,166,35,.2); }
+    .contact-info__icon { width: 40px; height: 40px; background: rgba(245,166,35,.1); border: 1px solid rgba(245,166,35,.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .contact-info__text h4 { font-family: var(--ff-heading); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 2px; }
+    .contact-info__text p  { font-size: 0.85rem; color: var(--clr-muted); }
+    .contact-info__text a  { color: var(--clr-gold); }
+    .contact-info__text a:hover { text-decoration: underline; }
+    .social-links { display: flex; gap: var(--space-sm); flex-wrap: wrap; }
+    .social-link { padding: 0.5rem 1rem; background: var(--clr-surface); border: 1px solid var(--clr-border); border-radius: var(--radius-sm); font-family: var(--ff-heading); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--clr-muted); transition: all var(--dur-fast); }
+    .social-link:hover { border-color: var(--clr-gold); color: var(--clr-gold); }
+
+    @media (max-width: 700px) {
+      .contact-section { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <a href="../index.html" class="nav__logo">
+      <div class="nav__logo-board"><span class="nav__logo-num">90<em>+1</em></span></div>
+      <span class="nav__logo-text">FÚTBOL<br><small>RETRO &amp; NEW</small></span>
+    </a>
+    <nav class="nav__links">
+      <a href="../index.html" class="nav__link">Inicio</a>
+      <a href="catalog.html" class="nav__link">Catálogo</a>
+      <a href="nosotros.html" class="nav__link">Nosotros</a>
+      <a href="contacto.html" class="nav__link nav__link--active">Contacto</a>
+    </nav>
+    <div class="nav__actions">
+      <button class="nav__cart-btn" id="cartBtn" aria-label="Carrito">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="nav__cart-count" id="cartCount">0</span>
+      </button>
+      <button class="nav__menu-btn" id="menuBtn" aria-label="Menú" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" hidden>
+    <a href="../index.html" class="mobile-menu__link">Inicio</a>
+    <a href="catalog.html" class="mobile-menu__link">Catálogo</a>
+    <a href="nosotros.html" class="mobile-menu__link">Nosotros</a>
+    <a href="contacto.html" class="mobile-menu__link">Contacto</a>
+  </div>
+
+  <main>
+    <section class="contact-hero">
+      <div class="contact-hero__eyebrow">— Escríbenos —</div>
+      <h1 class="contact-hero__title">Contacto</h1>
+      <p class="contact-hero__sub">¿Tienes preguntas sobre una prenda, quieres personalización o simplemente quieres hablar de fútbol? Escríbenos.</p>
+    </section>
+
+    <div class="contact-section">
+      <!-- Formulario -->
+      <div>
+        <form class="contact-form reveal-left" id="contactForm" novalidate>
+          <div class="contact-form__title">Envíanos un mensaje</div>
+
+          <div class="form-group">
+            <label for="cf-name">Nombre completo *</label>
+            <input type="text" id="cf-name" name="name" placeholder="Tu nombre" required autocomplete="name"/>
+          </div>
+          <div class="form-group">
+            <label for="cf-email">Correo electrónico *</label>
+            <input type="email" id="cf-email" name="email" placeholder="tu@correo.com" required autocomplete="email"/>
+          </div>
+          <div class="form-group">
+            <label for="cf-topic">Asunto</label>
+            <select id="cf-topic" name="topic">
+              <option value="">Selecciona un tema…</option>
+              <option>Consulta sobre producto</option>
+              <option>Personalización de camiseta</option>
+              <option>Estado de mi pedido</option>
+              <option>Devolución o cambio</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cf-msg">Mensaje *</label>
+            <textarea id="cf-msg" name="message" placeholder="Cuéntanos…" required></textarea>
+          </div>
+
+          <p class="contact-form__notice">Los campos marcados con * son obligatorios. No compartimos tu información con terceros.</p>
+          <button type="submit" class="btn btn--primary contact-form__submit">Enviar mensaje →</button>
+        </form>
+
+        <div class="contact-form__success" id="formSuccess">
+          <h3>✓ Mensaje recibido</h3>
+          <p>Gracias por escribirnos. Te responderemos en menos de 24 horas.</p>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="contact-info reveal-right">
+        <div class="contact-info__title">Información</div>
+
+        <div class="contact-info__item">
+          <div class="contact-info__icon">📧</div>
+          <div class="contact-info__text">
+            <h4>Email</h4>
+            <p><a href="mailto:hola@90mas1.co">hola@90mas1.co</a></p>
+            <p>Respuesta en menos de 24 h</p>
+          </div>
+        </div>
+
+        <div class="contact-info__item">
+          <div class="contact-info__icon">📱</div>
+          <div class="contact-info__text">
+            <h4>WhatsApp</h4>
+            <p><a href="#">+57 300 000 0000</a></p>
+            <p>Lunes a sábado, 9 am – 7 pm</p>
+          </div>
+        </div>
+
+        <div class="contact-info__item">
+          <div class="contact-info__icon">📍</div>
+          <div class="contact-info__text">
+            <h4>Ubicación</h4>
+            <p>Colombia — Envíos a todo el país</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="contact-info__title">Síguenos</div>
+          <div class="social-links">
+            <a href="#" class="social-link">Instagram</a>
+            <a href="#" class="social-link">TikTok</a>
+            <a href="#" class="social-link">X / Twitter</a>
+            <a href="#" class="social-link">Facebook</a>
+          </div>
+        </div>
+
+        <div class="contact-info__item">
+          <div class="contact-info__icon">🎓</div>
+          <div class="contact-info__text">
+            <h4>Proyecto Académico</h4>
+            <p>Este sitio es un proyecto educativo de Diseño de Interfaces &amp; Motion Design. No se procesan pagos reales.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer__bottom" style="border-top:none;padding-top:var(--space-xl);">
+      <p>© 2025 90+1 Fútbol Retro &amp; New. Proyecto académico — Diseño de Interfaces &amp; Motion Design.</p>
+    </div>
+  </footer>
+
+  <div class="cart-overlay" id="cartOverlay" hidden aria-hidden="true"></div>
+  <aside class="cart-drawer" id="cartDrawer" role="complementary" aria-label="Carrito" hidden>
+    <div class="cart-drawer__header">
+      <h2 class="cart-drawer__title">Tu Carrito</h2>
+      <span class="cart-drawer__count" id="cartDrawerCount">0 items</span>
+      <button class="cart-drawer__close" id="cartDrawerClose" aria-label="Cerrar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="cart-drawer__body">
+      <div class="cart-empty" id="cartEmpty"><div class="cart-empty__icon">🛒</div><p>Tu carrito está vacío.</p></div>
+      <ul class="cart-items" id="cartItems"></ul>
+    </div>
+    <div class="cart-drawer__footer" id="cartFooter" hidden>
+      <div class="cart-drawer__subtotal"><span>Subtotal</span><span id="cartSubtotal">$0</span></div>
+      <a href="cart.html" class="btn btn--primary cart-drawer__checkout">Ver carrito</a>
+    </div>
+  </aside>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/cart.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const nav = document.getElementById('nav');
+      window.addEventListener('scroll', () => nav?.classList.toggle('nav--scrolled', window.scrollY > 60), {passive:true});
+      const menuBtn = document.getElementById('menuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      menuBtn?.addEventListener('click', () => {
+        const open = menuBtn.classList.toggle('nav__menu-btn--open');
+        menuBtn.setAttribute('aria-expanded', open);
+        mobileMenu.hidden = !open;
+        mobileMenu.classList.toggle('mobile-menu--open', open);
+      });
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); obs.unobserve(e.target); } });
+      }, {threshold: 0.15});
+      document.querySelectorAll('.reveal-up,.reveal-left,.reveal-right').forEach(el => obs.observe(el));
+      Cart.init();
+
+      // Form submission (simulated)
+      const form = document.getElementById('contactForm');
+      const success = document.getElementById('formSuccess');
+      form?.addEventListener('submit', e => {
+        e.preventDefault();
+        const name  = document.getElementById('cf-name').value.trim();
+        const email = document.getElementById('cf-email').value.trim();
+        const msg   = document.getElementById('cf-msg').value.trim();
+        if (!name || !email || !msg) {
+          alert('Por favor completa los campos obligatorios.');
+          return;
+        }
+        form.style.display = 'none';
+        success.classList.add('visible');
+      });
+    });
+  </script>
+</body>
+</html>

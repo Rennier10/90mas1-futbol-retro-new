@@ -1,0 +1,88 @@
+/* ─── Design Tokens — 90+1 Fútbol Retro & New ────────────── */
+:root {
+  /* Paleta extraída del logo */
+  --clr-bg:          #0d0d0d;
+  --clr-bg-2:        #141414;
+  --clr-bg-3:        #1a1a1a;
+  --clr-surface:     #1e1e1e;
+  --clr-surface-2:   #252525;
+  --clr-border:      #2a2a2a;
+
+  --clr-gold:        #f5a623;
+  --clr-gold-light:  #ffbe5c;
+  --clr-gold-dark:   #c8841a;
+
+  --clr-amber:       #e8930a;
+  --clr-led:         #ff9500;        /* color del display LED */
+  --clr-led-glow:    rgba(255,149,0,.35);
+
+  --clr-white:       #f5f5f0;
+  --clr-muted:       #888888;
+  --clr-muted-2:     #555555;
+
+  --clr-green:       #22c55e;
+  --clr-red:         #ef4444;
+  --clr-blue:        #3b82f6;
+
+  /* Tipografía */
+  --ff-display:      'Bebas Neue', 'Impact', sans-serif;
+  --ff-heading:      'Oswald', 'Arial Narrow', sans-serif;
+  --ff-body:         'Inter', 'Helvetica Neue', sans-serif;
+
+  /* Espaciado */
+  --space-xs:   0.25rem;
+  --space-sm:   0.5rem;
+  --space-md:   1rem;
+  --space-lg:   1.5rem;
+  --space-xl:   2rem;
+  --space-2xl:  3rem;
+  --space-3xl:  4rem;
+  --space-4xl:  6rem;
+
+  /* Radios */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
+  --radius-full: 9999px;
+
+  /* Sombras */
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.4);
+  --shadow-md:  0 4px 16px rgba(0,0,0,.5);
+  --shadow-lg:  0 8px 32px rgba(0,0,0,.6);
+  --shadow-xl:  0 16px 64px rgba(0,0,0,.7);
+  --shadow-gold: 0 0 20px rgba(245,166,35,.3);
+  --shadow-led:  0 0 30px rgba(255,149,0,.5), 0 0 60px rgba(255,149,0,.2);
+
+  /* Transiciones */
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:    cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-inout: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --dur-fast:   150ms;
+  --dur-mid:    300ms;
+  --dur-slow:   500ms;
+  --dur-xslow:  800ms;
+
+  /* Nav */
+  --nav-h: 72px;
+
+  /* Z-index stack */
+  --z-nav:     100;
+  --z-modal:   200;
+  --z-cart:    190;
+  --z-toast:   300;
+  --z-cursor:  400;
+  --z-preload: 500;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

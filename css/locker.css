@@ -1,0 +1,350 @@
+/* ─── Locker Room ─────────────────────────────────────────── */
+.locker-section {
+  padding: var(--space-4xl) var(--space-xl);
+  background: linear-gradient(to bottom, var(--clr-bg), var(--clr-bg-2) 30%, var(--clr-bg-2) 70%, var(--clr-bg));
+  position: relative;
+  overflow: hidden;
+}
+/* Background wood floor hint */
+.locker-section::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 180px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(60,50,30,.06) 0px, rgba(60,50,30,.06) 1px,
+    transparent 1px, transparent 60px
+  );
+  pointer-events: none;
+}
+
+/* Header */
+.locker-section__header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+.locker-section__tag {
+  font-family: var(--ff-heading);
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  color: var(--clr-gold);
+  text-transform: uppercase;
+  margin-bottom: var(--space-sm);
+}
+.locker-section__title {
+  font-family: var(--ff-display);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-sm);
+}
+.locker-section__sub {
+  color: var(--clr-muted);
+  font-size: 0.95rem;
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ── Tabs ─────────────────────────────────────────────────── */
+.locker-tabs {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-2xl);
+  flex-wrap: wrap;
+}
+.locker-tab {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.65rem 1.5rem;
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--ff-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-muted);
+  background: var(--clr-surface);
+  transition: all var(--dur-mid) var(--ease-out);
+}
+.locker-tab:hover {
+  color: var(--clr-white);
+  border-color: var(--clr-gold);
+}
+.locker-tab--active {
+  background: var(--clr-gold);
+  border-color: var(--clr-gold);
+  color: #000;
+}
+.locker-tab:focus-visible {
+  outline: 2px solid var(--clr-gold);
+  outline-offset: 3px;
+}
+
+/* ── Rack Panel ─────────────────────────────────────────── */
+.rack-panel {
+  position: relative;
+}
+
+/* ── Rack Rod ─────────────────────────────────────────────── */
+.rack {
+  position: relative;
+  padding-top: 60px;
+}
+.rack__rod {
+  position: absolute;
+  top: 20px; left: 5%; right: 5%;
+  height: 10px;
+  background: linear-gradient(to bottom,
+    #555 0%, #888 30%, #666 60%, #3a3a3a 100%);
+  border-radius: 10px;
+  box-shadow:
+    0 4px 8px rgba(0,0,0,.5),
+    inset 0 2px 0 rgba(255,255,255,.12),
+    inset 0 -2px 0 rgba(0,0,0,.3);
+  z-index: 2;
+}
+.rack__rod::before,
+.rack__rod::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  width: 18px; height: 22px;
+  background: linear-gradient(to bottom, #666, #3a3a3a);
+  border-radius: 3px;
+  box-shadow: var(--shadow-sm);
+}
+.rack__rod::before { left: 15%; }
+.rack__rod::after  { right: 15%; }
+
+/* ── Rack Items Grid ─────────────────────────────────────── */
+.rack__items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-xl) var(--space-lg);
+  padding: 0 var(--space-md);
+  justify-items: center;
+}
+
+/* ── Jersey Hanger ────────��──────────────────────────────── */
+.jersey-hanger {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  transform-origin: top center;
+  transition: transform var(--dur-slow) var(--ease-spring);
+}
+.jersey-hanger:hover {
+  transform: rotate(3deg) translateY(-6px);
+}
+.jersey-hanger:focus-visible {
+  outline: 2px solid var(--clr-gold);
+  outline-offset: 8px;
+  border-radius: 4px;
+}
+
+/* Hook */
+.jersey-hanger__hook {
+  width: 2px;
+  height: 28px;
+  background: linear-gradient(to bottom, #888, #555);
+  position: relative;
+}
+.jersey-hanger__hook::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 10px; height: 10px;
+  border: 2px solid #777;
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+}
+
+/* Crossbar */
+.jersey-hanger__bar {
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(to right, #444, #888, #666, #888, #444);
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.4);
+  position: relative;
+  margin-bottom: 2px;
+}
+.jersey-hanger__bar::before,
+.jersey-hanger__bar::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  width: 2px; height: 10px;
+  background: #666;
+  border-radius: 0 0 2px 2px;
+}
+.jersey-hanger__bar::before { left: 4px; }
+.jersey-hanger__bar::after  { right: 4px; }
+
+/* Jersey SVG container */
+.jersey-hanger__jersey {
+  width: 160px;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,.7));
+  transition: filter var(--dur-mid);
+}
+.jersey-hanger:hover .jersey-hanger__jersey {
+  filter: drop-shadow(0 12px 32px rgba(0,0,0,.8))
+          drop-shadow(0 0 20px rgba(245,166,35,.2));
+}
+.jersey-hanger__jersey svg {
+  width: 100%;
+  height: auto;
+}
+
+/* Label under jersey */
+.jersey-hanger__label {
+  margin-top: var(--space-md);
+  text-align: center;
+}
+.jersey-hanger__team {
+  font-family: var(--ff-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-white);
+  display: block;
+}
+.jersey-hanger__year {
+  font-size: 0.7rem;
+  color: var(--clr-muted);
+  display: block;
+  margin-top: 2px;
+}
+.jersey-hanger__price {
+  font-family: var(--ff-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--clr-gold);
+  display: block;
+  margin-top: 4px;
+}
+
+/* ── Boots Shelf ─────────────────────────────────────────── */
+.boots-shelf {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-xl);
+  padding: var(--space-lg) var(--space-md);
+  position: relative;
+}
+/* Shelf board line */
+.boots-shelf::before {
+  content: '';
+  position: absolute;
+  bottom: -var(--space-md);
+  left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, transparent, rgba(100,80,40,.4), transparent);
+}
+
+.boot-card {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  cursor: pointer;
+  transition: transform var(--dur-slow) var(--ease-spring),
+              border-color var(--dur-mid),
+              box-shadow var(--dur-mid);
+  position: relative;
+  overflow: hidden;
+}
+.boot-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(245,166,35,.06) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity var(--dur-mid);
+}
+.boot-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--clr-gold);
+  box-shadow: var(--shadow-gold);
+}
+.boot-card:hover::before { opacity: 1; }
+.boot-card:focus-visible {
+  outline: 2px solid var(--clr-gold);
+  outline-offset: 3px;
+}
+
+.boot-card__img {
+  width: 100%;
+  height: 140px;
+  object-fit: contain;
+  margin-bottom: var(--space-md);
+  transition: transform var(--dur-slow) var(--ease-spring);
+}
+.boot-card:hover .boot-card__img {
+  transform: scale(1.06) rotate(-2deg);
+}
+.boot-card__img--svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 140px;
+  margin-bottom: var(--space-md);
+}
+.boot-card__img--svg svg {
+  width: 100%;
+  max-height: 130px;
+}
+
+.boot-card__badge {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  background: var(--clr-gold);
+  color: #000;
+  font-family: var(--ff-heading);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.boot-card__name {
+  font-family: var(--ff-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--clr-white);
+  margin-bottom: 4px;
+}
+.boot-card__brand {
+  font-size: 0.75rem;
+  color: var(--clr-muted);
+  margin-bottom: var(--space-sm);
+}
+.boot-card__price {
+  font-family: var(--ff-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--clr-gold);
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .rack__items {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: var(--space-lg) var(--space-md);
+  }
+  .jersey-hanger__jersey { width: 120px; }
+  .jersey-hanger__bar    { width: 60px; }
+}

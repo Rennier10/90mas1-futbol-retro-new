@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nosotros — 90+1 Fútbol Retro & New</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <link rel="stylesheet" href="../css/reset.css"/>
+  <link rel="stylesheet" href="../css/variables.css"/>
+  <link rel="stylesheet" href="../css/main.css"/>
+  <link rel="stylesheet" href="../css/nav.css"/>
+  <link rel="stylesheet" href="../css/footer.css"/>
+  <link rel="stylesheet" href="../css/animations.css"/>
+  <link rel="stylesheet" href="../css/cart.css"/>
+  <style>
+    .about-hero {
+      padding: calc(var(--nav-h) + var(--space-4xl)) var(--space-xl) var(--space-3xl);
+      background: var(--clr-bg);
+      position: relative; overflow: hidden;
+    }
+    .about-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 20% 50%, rgba(245,166,35,.04) 0%, transparent 60%);
+    }
+    .about-hero__inner {
+      max-width: 900px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4xl);
+      align-items: center; position: relative;
+    }
+    .about-hero__eyebrow {
+      font-family: var(--ff-heading); font-size: 0.75rem; letter-spacing: 0.25em;
+      color: var(--clr-gold); text-transform: uppercase; margin-bottom: var(--space-sm);
+    }
+    .about-hero__title {
+      font-family: var(--ff-display); font-size: clamp(3rem, 7vw, 6rem);
+      letter-spacing: 0.02em; line-height: 1; margin-bottom: var(--space-lg);
+    }
+    .about-hero__title span { color: var(--clr-gold); }
+    .about-hero__text { color: var(--clr-muted); font-size: 1rem; line-height: 1.75; }
+    .about-scoreboard {
+      background: linear-gradient(145deg, #1a1a1a, #111);
+      border: 2px solid #333; border-radius: 10px;
+      padding: 2rem; text-align: center;
+      box-shadow: var(--shadow-led);
+    }
+    .about-scoreboard__num {
+      font-family: var(--ff-display); font-size: 5rem;
+      color: var(--clr-led); text-shadow: var(--shadow-led);
+      letter-spacing: -4px; display: block;
+    }
+    .about-scoreboard__label {
+      font-family: var(--ff-heading); font-size: 1.1rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--clr-white);
+      border-top: 1px solid #333; padding-top: 0.6rem; margin-top: 0.4rem;
+    }
+    .about-scoreboard__label span { color: var(--clr-gold); }
+
+    /* Brand guide section */
+    .guide-section {
+      padding: var(--space-4xl) var(--space-xl);
+      background: var(--clr-bg-2);
+      border-top: 1px solid var(--clr-border);
+    }
+    .guide-section__title {
+      font-family: var(--ff-display); font-size: clamp(2rem, 5vw, 4rem);
+      text-align: center; margin-bottom: var(--space-3xl); letter-spacing: 0.03em;
+    }
+    .guide-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: var(--space-xl); max-width: 1100px; margin: 0 auto;
+    }
+    .guide-card {
+      background: var(--clr-surface); border: 1px solid var(--clr-border);
+      border-radius: var(--radius-lg); padding: var(--space-xl);
+    }
+    .guide-card__eyebrow {
+      font-family: var(--ff-heading); font-size: 0.65rem; letter-spacing: 0.2em;
+      color: var(--clr-gold); text-transform: uppercase; margin-bottom: var(--space-md);
+    }
+    .guide-card h3 {
+      font-family: var(--ff-heading); font-size: 1.1rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: var(--space-md);
+    }
+    /* Palette */
+    .palette { display: flex; gap: var(--space-sm); flex-wrap: wrap; }
+    .palette__swatch {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+    }
+    .palette__color {
+      width: 48px; height: 48px; border-radius: var(--radius-sm);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .palette__label { font-size: 0.6rem; color: var(--clr-muted); font-family: var(--ff-heading); letter-spacing: 0.05em; }
+    /* Typography */
+    .type-sample { margin-bottom: var(--space-sm); }
+    .type-sample__name { font-size: 0.7rem; color: var(--clr-muted); margin-bottom: 2px; }
+    .type-sample--display { font-family: var(--ff-display); font-size: 1.8rem; letter-spacing: 0.02em; }
+    .type-sample--heading { font-family: var(--ff-heading); font-size: 1.1rem; font-weight: 700; text-transform: uppercase; }
+    .type-sample--body { font-family: var(--ff-body); font-size: 0.9rem; color: var(--clr-muted); }
+    /* Tone */
+    .tone-list { list-style: none; }
+    .tone-list li { padding: var(--space-sm) 0; border-bottom: 1px solid var(--clr-border); font-size: 0.85rem; color: var(--clr-muted); display: flex; gap: var(--space-sm); }
+    .tone-list li::before { content: '✓'; color: var(--clr-gold); flex-shrink: 0; }
+    /* Motion principles */
+    .motion-list { display: flex; flex-direction: column; gap: var(--space-sm); }
+    .motion-item { display: flex; gap: var(--space-md); align-items: flex-start; }
+    .motion-item__icon { width: 32px; height: 32px; background: rgba(245,166,35,.1); border: 1px solid rgba(245,166,35,.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
+    .motion-item__info h4 { font-family: var(--ff-heading); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 2px; }
+    .motion-item__info p { font-size: 0.75rem; color: var(--clr-muted); line-height: 1.5; }
+
+    /* Team section */
+    .team-section {
+      padding: var(--space-4xl) var(--space-xl);
+      background: var(--clr-bg);
+    }
+    .team-section__title {
+      font-family: var(--ff-display); font-size: clamp(2rem, 5vw, 4rem);
+      text-align: center; margin-bottom: var(--space-3xl);
+    }
+    .team-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--space-xl); max-width: 900px; margin: 0 auto;
+    }
+    .team-card {
+      text-align: center;
+      background: var(--clr-surface); border: 1px solid var(--clr-border);
+      border-radius: var(--radius-lg); padding: var(--space-xl);
+      transition: transform var(--dur-slow) var(--ease-spring), border-color var(--dur-mid);
+    }
+    .team-card:hover { transform: translateY(-6px); border-color: rgba(245,166,35,.3); }
+    .team-card__avatar {
+      width: 70px; height: 70px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--clr-gold), var(--clr-amber));
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto var(--space-md);
+      font-family: var(--ff-display); font-size: 1.5rem; color: #000;
+    }
+    .team-card__name { font-family: var(--ff-heading); font-size: 0.95rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
+    .team-card__role { font-size: 0.75rem; color: var(--clr-gold); font-family: var(--ff-heading); letter-spacing: 0.08em; text-transform: uppercase; }
+
+    @media (max-width: 768px) {
+      .about-hero__inner { grid-template-columns: 1fr; }
+      .about-scoreboard { max-width: 240px; margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <a href="../index.html" class="nav__logo">
+      <div class="nav__logo-board"><span class="nav__logo-num">90<em>+1</em></span></div>
+      <span class="nav__logo-text">FÚTBOL<br><small>RETRO &amp; NEW</small></span>
+    </a>
+    <nav class="nav__links">
+      <a href="../index.html" class="nav__link">Inicio</a>
+      <a href="catalog.html" class="nav__link">Catálogo</a>
+      <a href="nosotros.html" class="nav__link nav__link--active">Nosotros</a>
+      <a href="contacto.html" class="nav__link">Contacto</a>
+    </nav>
+    <div class="nav__actions">
+      <button class="nav__cart-btn" id="cartBtn" aria-label="Carrito">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="nav__cart-count" id="cartCount">0</span>
+      </button>
+      <button class="nav__menu-btn" id="menuBtn" aria-label="Menú" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" hidden>
+    <a href="../index.html" class="mobile-menu__link">Inicio</a>
+    <a href="catalog.html" class="mobile-menu__link">Catálogo</a>
+    <a href="nosotros.html" class="mobile-menu__link">Nosotros</a>
+    <a href="contacto.html" class="mobile-menu__link">Contacto</a>
+  </div>
+
+  <main>
+    <!-- Hero about -->
+    <section class="about-hero">
+      <div class="about-hero__inner">
+        <div class="reveal-left">
+          <div class="about-hero__eyebrow">— Nuestra historia —</div>
+          <h1 class="about-hero__title">Somos<br><span>90+1</span></h1>
+          <p class="about-hero__text">
+            Nacimos de la pasión por el fútbol y la nostalgia de las camisetas que hicieron historia.
+            Somos un equipo de estudiantes que decidió convertir esa pasión en una tienda que honra
+            tanto el pasado glorioso como el presente electrizante del balompié mundial.
+          </p>
+          <p class="about-hero__text" style="margin-top:var(--space-md);">
+            El nombre viene de ese minuto extra, ese tiempo de descuento en el que todo puede pasar.
+            En el fútbol, en el diseño y en la vida, el mejor momento siempre puede estar por venir.
+          </p>
+        </div>
+        <div class="reveal-right">
+          <div class="about-scoreboard">
+            <span class="about-scoreboard__num">90+1</span>
+            <div class="about-scoreboard__label">FÚTBOL <span>RETRO &amp; NEW</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Brand Guide -->
+    <section class="guide-section" id="guia">
+      <h2 class="guide-section__title">Guía de Marca</h2>
+      <div class="guide-grid">
+
+        <!-- Paleta -->
+        <div class="guide-card reveal-up">
+          <div class="guide-card__eyebrow">01 — Identidad visual</div>
+          <h3>Paleta de colores</h3>
+          <div class="palette">
+            <div class="palette__swatch">
+              <div class="palette__color" style="background:#0d0d0d;"></div>
+              <span class="palette__label">#0D0D0D<br>Negro campo</span>
+            </div>
+            <div class="palette__swatch">
+              <div class="palette__color" style="background:#f5a623;"></div>
+              <span class="palette__label">#F5A623<br>Dorado LED</span>
+            </div>
+            <div class="palette__swatch">
+              <div class="palette__color" style="background:#ff9500;"></div>
+              <span class="palette__label">#FF9500<br>Ámbar marcador</span>
+            </div>
+            <div class="palette__swatch">
+              <div class="palette__color" style="background:#f5f5f0;"></div>
+              <span class="palette__label">#F5F5F0<br>Blanco camiseta</span>
+            </div>
+            <div class="palette__swatch">
+              <div class="palette__color" style="background:#888;"></div>
+              <span class="palette__label">#888888<br>Gris vestuario</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tipografía -->
+        <div class="guide-card reveal-up" data-delay="0.1">
+          <div class="guide-card__eyebrow">02 — Tipografía</div>
+          <h3>Fuentes</h3>
+          <div class="type-sample">
+            <div class="type-sample__name">Display — Bebas Neue</div>
+            <div class="type-sample--display">90+1 Retro</div>
+          </div>
+          <div class="type-sample">
+            <div class="type-sample__name">Heading — Oswald 700</div>
+            <div class="type-sample--heading">Champions League</div>
+          </div>
+          <div class="type-sample">
+            <div class="type-sample__name">Body — Inter 400</div>
+            <div class="type-sample--body">La camiseta que vistió a toda una generación de campeones.</div>
+          </div>
+        </div>
+
+        <!-- Tono -->
+        <div class="guide-card reveal-up" data-delay="0.2">
+          <div class="guide-card__eyebrow">03 — Comunicación</div>
+          <h3>Tono de voz</h3>
+          <ul class="tone-list">
+            <li>Apasionado — hablamos como un aficionado que sabe</li>
+            <li>Directo — sin relleno, sin jerga de marca</li>
+            <li>Histórico — cada prenda tiene una historia real</li>
+            <li>Inclusivo — para coleccionistas y nuevos fanáticos</li>
+            <li>Nunca snob — el fútbol es de todos</li>
+          </ul>
+        </div>
+
+        <!-- Motion -->
+        <div class="guide-card reveal-up" data-delay="0.3">
+          <div class="guide-card__eyebrow">04 — Motion Design</div>
+          <h3>Principios de animación</h3>
+          <div class="motion-list">
+            <div class="motion-item">
+              <div class="motion-item__icon">⏱</div>
+              <div class="motion-item__info">
+                <h4>Timing</h4>
+                <p>Curvas ease-out y spring para movimientos naturales. Nunca linear.</p>
+              </div>
+            </div>
+            <div class="motion-item">
+              <div class="motion-item__icon">📐</div>
+              <div class="motion-item__info">
+                <h4>Jerarquía</h4>
+                <p>El marcador entra primero. Los elementos secundarios siguen con stagger.</p>
+              </div>
+            </div>
+            <div class="motion-item">
+              <div class="motion-item__icon">🎯</div>
+              <div class="motion-item__info">
+                <h4>Propósito</h4>
+                <p>Cada animación guía la atención o confirma una acción. Nada decorativo.</p>
+              </div>
+            </div>
+            <div class="motion-item">
+              <div class="motion-item__icon">♿</div>
+              <div class="motion-item__info">
+                <h4>Accesibilidad</h4>
+                <p>prefers-reduced-motion desactiva todas las animaciones no esenciales.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team-section">
+      <h2 class="team-section__title">El Equipo</h2>
+      <div class="team-grid">
+        <div class="team-card reveal-up">
+          <div class="team-card__avatar">D</div>
+          <div class="team-card__name">Diseñador UI</div>
+          <div class="team-card__role">Identidad & Figma</div>
+        </div>
+        <div class="team-card reveal-up" data-delay="0.1">
+          <div class="team-card__avatar">M</div>
+          <div class="team-card__name">Motion Designer</div>
+          <div class="team-card__role">GSAP & Animaciones</div>
+        </div>
+        <div class="team-card reveal-up" data-delay="0.2">
+          <div class="team-card__avatar">F</div>
+          <div class="team-card__name">Frontend Dev</div>
+          <div class="team-card__role">HTML · CSS · JS</div>
+        </div>
+        <div class="team-card reveal-up" data-delay="0.3">
+          <div class="team-card__avatar">C</div>
+          <div class="team-card__name">Contenido</div>
+          <div class="team-card__role">Copywriting & Data</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <div class="footer__logo">
+          <span class="footer__logo-num">90<em>+1</em></span>
+          <span class="footer__logo-text">FÚTBOL<br><small>RETRO &amp; NEW</small></span>
+        </div>
+        <p class="footer__tagline">La historia del fútbol,<br>puesta en tu espalda.</p>
+      </div>
+      <nav class="footer__nav">
+        <div class="footer__col">
+          <h4>Tienda</h4>
+          <a href="catalog.html">Catálogo</a>
+          <a href="cart.html">Carrito</a>
+        </div>
+        <div class="footer__col">
+          <h4>Nosotros</h4>
+          <a href="nosotros.html">Quiénes somos</a>
+          <a href="#guia">Guía de marca</a>
+        </div>
+        <div class="footer__col">
+          <h4>Contacto</h4>
+          <a href="contacto.html">Escríbenos</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2025 90+1 Fútbol Retro &amp; New. Proyecto académico — Diseño de Interfaces &amp; Motion Design.</p>
+    </div>
+  </footer>
+
+  <div class="cart-overlay" id="cartOverlay" hidden aria-hidden="true"></div>
+  <aside class="cart-drawer" id="cartDrawer" role="complementary" aria-label="Carrito" hidden>
+    <div class="cart-drawer__header">
+      <h2 class="cart-drawer__title">Tu Carrito</h2>
+      <span class="cart-drawer__count" id="cartDrawerCount">0 items</span>
+      <button class="cart-drawer__close" id="cartDrawerClose" aria-label="Cerrar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="cart-drawer__body" id="cartDrawerBody">
+      <div class="cart-empty" id="cartEmpty"><div class="cart-empty__icon">🛒</div><p>Tu carrito está vacío.</p></div>
+      <ul class="cart-items" id="cartItems"></ul>
+    </div>
+    <div class="cart-drawer__footer" id="cartFooter" hidden>
+      <div class="cart-drawer__subtotal"><span>Subtotal</span><span id="cartSubtotal">$0</span></div>
+      <a href="cart.html" class="btn btn--primary cart-drawer__checkout">Ver carrito</a>
+    </div>
+  </aside>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/cart.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const nav = document.getElementById('nav');
+      window.addEventListener('scroll', () => nav?.classList.toggle('nav--scrolled', window.scrollY > 60), {passive:true});
+      const menuBtn = document.getElementById('menuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      menuBtn?.addEventListener('click', () => {
+        const open = menuBtn.classList.toggle('nav__menu-btn--open');
+        menuBtn.setAttribute('aria-expanded', open);
+        mobileMenu.hidden = !open;
+        mobileMenu.classList.toggle('mobile-menu--open', open);
+      });
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); obs.unobserve(e.target); } });
+      }, {threshold: 0.15});
+      document.querySelectorAll('.reveal-up,.reveal-left,.reveal-right').forEach(el => obs.observe(el));
+      Cart.init();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+/* ─── Animations & Motion ─────────────────────────────────── */
+
+/* ── Preloader ───────────────────────────────────────────── */
+.preloader {
+  position: fixed;
+  inset: 0;
+  background: var(--clr-bg);
+  z-index: var(--z-preload);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.preloader__scoreboard {
+  background: linear-gradient(145deg, #1a1a1a, #111);
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 0 60px rgba(255,149,0,.2);
+  min-width: 260px;
+  text-align: center;
+}
+.preloader__led {
+  font-family: var(--ff-display);
+  font-size: clamp(4rem, 15vw, 7rem);
+  color: var(--clr-led);
+  text-shadow: var(--shadow-led);
+  letter-spacing: -4px;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.preloader__plus {
+  color: var(--clr-gold);
+  text-shadow: 0 0 10px rgba(245,166,35,.4);
+}
+.preloader__one {
+  color: var(--clr-led);
+  display: inline-block;
+  animation: ledFlicker 0.1s step-end infinite;
+}
+.preloader__brand {
+  font-family: var(--ff-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--clr-white);
+  border-top: 1px solid #333;
+  padding-top: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+.preloader__brand span { color: var(--clr-gold); }
+.preloader__bar {
+  width: 100%;
+  height: 3px;
+  background: #222;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.preloader__fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--clr-gold-dark), var(--clr-led));
+  border-radius: 2px;
+  transition: width 0.05s linear;
+  box-shadow: 0 0 10px var(--clr-led);
+}
+@keyframes ledFlicker {
+  0%  { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ── Scroll-reveal classes ───────────────────────────────── */
+.reveal-up,
+.reveal-left,
+.reveal-right {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.reveal-up    { transform: translateY(40px); }
+.reveal-left  { transform: translateX(-40px); }
+.reveal-right { transform: translateX(40px); }
+
+.reveal-up.in-view,
+.reveal-left.in-view,
+.reveal-right.in-view {
+  opacity: 1;
+  transform: translate(0);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+/* Delay helpers */
+[data-delay="0.1"].in-view  { transition-delay: 0.1s; }
+[data-delay="0.2"].in-view  { transition-delay: 0.2s; }
+[data-delay="0.3"].in-view  { transition-delay: 0.3s; }
+[data-delay="0.4"].in-view  { transition-delay: 0.4s; }
+
+/* ── Jersey entrance stagger ─────────────────────────────── */
+.jersey-hanger {
+  opacity: 0;
+  transform: translateY(-30px) rotate(-5deg);
+}
+.jersey-hanger.hanger-in {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg);
+  transition: opacity 0.5s var(--ease-out), transform 0.6s var(--ease-spring);
+}
+.jersey-hanger.hanger-in:hover {
+  transform: rotate(3deg) translateY(-6px);
+}
+
+/* ── Boot card entrance ───────────────────────────────────── */
+.boot-card {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.boot-card.boot-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out),
+              border-color var(--dur-mid), box-shadow var(--dur-mid);
+}
+
+/* ── Page transition ─────────────────────────────────────── */
+.page-out {
+  animation: pageOut 0.4s var(--ease-in) forwards;
+}
+@keyframes pageOut {
+  to { opacity: 0; transform: translateY(-20px); }
+}
+
+/* ── Particle dots (featured section) ───────────────────── */
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--clr-gold);
+  border-radius: 50%;
+  opacity: 0;
+  animation: particleFloat var(--dur, 4s) var(--delay, 0s) ease-in-out infinite;
+}
+@keyframes particleFloat {
+  0%   { transform: translate(0, 0); opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.3; }
+  100% { transform: translate(var(--tx, 20px), var(--ty, -60px)); opacity: 0; }
+}
+
+/* ── Cart bump ───────────────────────────────────────────── */
+@keyframes cartBump {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.4); }
+  70%  { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+.cart-bump { animation: cartBump 0.4s var(--ease-spring); }
+
+/* ── Scoreboard number flicker (hero) ────────────────────── */
+@keyframes numFlicker {
+  0%, 94%, 100% { opacity: 1; }
+  95%            { opacity: 0.2; }
+  97%            { opacity: 1; }
+  98%            { opacity: 0.4; }
+}
+.hero__sb-num, .hero__sb-extra {
+  animation: numFlicker 6s ease-in-out infinite;
+}
+.hero__sb-extra { animation-delay: 0.3s; }

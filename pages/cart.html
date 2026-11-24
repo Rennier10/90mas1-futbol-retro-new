@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrito — 90+1 Fútbol Retro & New</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/reset.css"/>
+  <link rel="stylesheet" href="../css/variables.css"/>
+  <link rel="stylesheet" href="../css/main.css"/>
+  <link rel="stylesheet" href="../css/nav.css"/>
+  <link rel="stylesheet" href="../css/footer.css"/>
+  <link rel="stylesheet" href="../css/animations.css"/>
+  <style>
+    .cart-page {
+      min-height: 100vh;
+      padding: calc(var(--nav-h) + var(--space-3xl)) var(--space-xl) var(--space-4xl);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .cart-page__title {
+      font-family: var(--ff-display);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      letter-spacing: 0.03em;
+      margin-bottom: var(--space-2xl);
+    }
+    .cart-page__layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: var(--space-2xl);
+      align-items: start;
+    }
+    .cart-page__items { display: flex; flex-direction: column; gap: var(--space-md); }
+    .cart-page-item {
+      display: flex; gap: var(--space-lg); padding: var(--space-lg);
+      background: var(--clr-surface); border: 1px solid var(--clr-border);
+      border-radius: var(--radius-lg); transition: border-color var(--dur-mid);
+    }
+    .cart-page-item:hover { border-color: rgba(245,166,35,.2); }
+    .cart-page-item__thumb {
+      width: 80px; height: 90px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--clr-bg-3); border-radius: var(--radius-md);
+    }
+    .cart-page-item__thumb svg { width: 70px; }
+    .cart-page-item__info { flex: 1; }
+    .cart-page-item__name {
+      font-family: var(--ff-heading); font-size: 1rem; font-weight: 700;
+      letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 4px;
+    }
+    .cart-page-item__sub { font-size: 0.8rem; color: var(--clr-muted); margin-bottom: var(--space-sm); }
+    .cart-page-item__controls { display: flex; align-items: center; gap: var(--space-sm); }
+    .cart-page-item__qty-btn {
+      width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+      border: 1.5px solid var(--clr-border); border-radius: var(--radius-sm);
+      font-size: 1.1rem; color: var(--clr-muted);
+      transition: border-color var(--dur-fast), color var(--dur-fast);
+    }
+    .cart-page-item__qty-btn:hover { border-color: var(--clr-gold); color: var(--clr-gold); }
+    .cart-page-item__qty { font-family: var(--ff-heading); font-size: 1rem; font-weight: 600; min-width: 24px; text-align: center; }
+    .cart-page-item__right { display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; }
+    .cart-page-item__price { font-family: var(--ff-heading); font-size: 1.1rem; font-weight: 600; color: var(--clr-gold); }
+    .cart-page-item__remove { font-family: var(--ff-heading); font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--clr-muted-2); transition: color var(--dur-fast); }
+    .cart-page-item__remove:hover { color: var(--clr-red); }
+    .cart-summary {
+      background: var(--clr-surface); border: 1px solid var(--clr-border);
+      border-radius: var(--radius-lg); padding: var(--space-xl);
+      position: sticky; top: calc(var(--nav-h) + var(--space-lg));
+    }
+    .cart-summary__title { font-family: var(--ff-heading); font-size: 1.1rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: var(--space-lg); }
+    .cart-summary__row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--space-sm); font-size: 0.9rem; color: var(--clr-muted); }
+    .cart-summary__row--total { border-top: 1px solid var(--clr-border); padding-top: var(--space-md); margin-top: var(--space-sm); font-family: var(--ff-heading); font-size: 1.1rem; font-weight: 700; color: var(--clr-gold); }
+    .cart-summary__shipping { font-size: 0.75rem; text-align: center; color: var(--clr-green); margin-bottom: var(--space-md); }
+    .cart-summary__notice {
+      margin-top: var(--space-md); padding: var(--space-md);
+      background: rgba(245,166,35,.06); border: 1px solid rgba(245,166,35,.2);
+      border-radius: var(--radius-sm); font-size: 0.75rem; color: var(--clr-muted);
+      text-align: center; line-height: 1.5;
+    }
+    .cart-empty-page { text-align: center; padding: var(--space-4xl); }
+    .cart-empty-page__icon { font-size: 4rem; margin-bottom: var(--space-lg); }
+    .cart-empty-page h2 { font-family: var(--ff-display); font-size: 2.5rem; margin-bottom: var(--space-md); }
+    .cart-empty-page p { color: var(--clr-muted); margin-bottom: var(--space-xl); }
+    @media (max-width: 768px) {
+      .cart-page__layout { grid-template-columns: 1fr; }
+      .cart-summary { position: static; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav nav--scrolled" id="nav" role="banner">
+    <a href="../index.html" class="nav__logo">
+      <div class="nav__logo-board"><span class="nav__logo-num">90<em>+1</em></span></div>
+      <span class="nav__logo-text">FÚTBOL<br><small>RETRO &amp; NEW</small></span>
+    </a>
+    <nav class="nav__links">
+      <a href="../index.html" class="nav__link">Inicio</a>
+      <a href="catalog.html" class="nav__link">Catálogo</a>
+      <a href="nosotros.html" class="nav__link">Nosotros</a>
+      <a href="contacto.html" class="nav__link">Contacto</a>
+    </nav>
+    <div class="nav__actions">
+      <button class="nav__cart-btn" id="cartBtn" aria-label="Carrito">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="nav__cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="cart-page">
+      <h1 class="cart-page__title">Tu Carrito</h1>
+      <div id="cartPageContent"></div>
+    </div>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer__bottom" style="border-top:none;padding-top:var(--space-xl);">
+      <p>© 2025 90+1 Fútbol Retro &amp; New. Proyecto académico.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="../js/data.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav?.classList.toggle('nav--scrolled', window.scrollY > 60), {passive:true});
+
+    let items = JSON.parse(localStorage.getItem('cart90') || '[]');
+
+    function save() { localStorage.setItem('cart90', JSON.stringify(items)); }
+    function getCount() { return items.reduce((n,i) => n+i.qty, 0); }
+    function getSubtotal() { return items.reduce((n,i) => n+i.price*i.qty, 0); }
+    function updateCount() {
+      const c = document.getElementById('cartCount');
+      if (c) c.textContent = getCount();
+    }
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      if (!t) return;
+      t.textContent = msg;
+      t.classList.add('toast--visible');
+      clearTimeout(t._t);
+      t._t = setTimeout(() => t.classList.remove('toast--visible'), 3000);
+    }
+
+    function render() {
+      updateCount();
+      const content = document.getElementById('cartPageContent');
+      if (items.length === 0) {
+        content.innerHTML = `<div class="cart-empty-page"><div class="cart-empty-page__icon">🛒</div><h2>Carrito vacío</h2><p>Todavía no has agregado ninguna prenda.</p><a href="catalog.html" class="btn btn--primary">Explorar catálogo</a></div>`;
+        return;
+      }
+
+      const shipping = getSubtotal() > 200000 ? 0 : 15000;
+      const total    = getSubtotal() + shipping;
+
+      content.innerHTML = `
+        <div class="cart-page__layout">
+          <div class="cart-page__items" id="cartPageItems"></div>
+          <div class="cart-summary">
+            <h2 class="cart-summary__title">Resumen</h2>
+            <div class="cart-summary__row"><span>Subtotal</span><span>${formatPrice(getSubtotal())}</span></div>
+            <div class="cart-summary__row"><span>Envío</span><span>${shipping === 0 ? 'Gratis' : formatPrice(shipping)}</span></div>
+            <div class="cart-summary__row cart-summary__row--total"><span>Total</span><span>${formatPrice(total)}</span></div>
+            ${shipping === 0 ? '<p class="cart-summary__shipping">✓ Envío gratis incluido</p>' : ''}
+            <button class="btn btn--primary" style="width:100%;justify-content:center;margin-top:var(--space-md);" onclick="alert('Gracias por tu compra simulada 🎽\\n\\nEsto es un proyecto académico.\\nNo se procesó ningún pago real.')">Finalizar compra</button>
+            <div class="cart-summary__notice">
+              ⚠️ Simulación académica<br>No se realiza ningún cobro real.
+            </div>
+          </div>
+        </div>`;
+
+      const listEl = document.getElementById('cartPageItems');
+      items.forEach(item => {
+        const p = ALL_PRODUCTS[item.id];
+        const svgStr = p ? p.svg() : '';
+        const div = document.createElement('div');
+        div.className = 'cart-page-item';
+        div.dataset.key = item.key;
+        div.innerHTML = `
+          <div class="cart-page-item__thumb">${svgStr}</div>
+          <div class="cart-page-item__info">
+            <div class="cart-page-item__name">${item.name}</div>
+            <div class="cart-page-item__sub">Talla: ${item.size} · ${item.price.toLocaleString('es-CO')} c/u</div>
+            <div class="cart-page-item__controls">
+              <button class="cart-page-item__qty-btn" data-action="dec" data-key="${item.key}">−</button>
+              <span class="cart-page-item__qty">${item.qty}</span>
+              <button class="cart-page-item__qty-btn" data-action="inc" data-key="${item.key}">+</button>
+            </div>
+          </div>
+          <div class="cart-page-item__right">
+            <span class="cart-page-item__price">${formatPrice(item.price * item.qty)}</span>
+            <button class="cart-page-item__remove" data-key="${item.key}">Eliminar</button>
+          </div>`;
+        listEl.appendChild(div);
+      });
+
+      listEl.onclick = e => {
+        const inc = e.target.closest('[data-action="inc"]');
+        const dec = e.target.closest('[data-action="dec"]');
+        const rem = e.target.closest('.cart-page-item__remove');
+        if (inc) { const it=items.find(i=>i.key===inc.dataset.key); if(it) it.qty++; save(); render(); }
+        if (dec) { const it=items.find(i=>i.key===dec.dataset.key); if(it) { it.qty--; if(it.qty<1) items=items.filter(i=>i.key!==dec.dataset.key); } save(); render(); }
+        if (rem) { items=items.filter(i=>i.key!==rem.dataset.key); save(); render(); showToast('Producto eliminado'); }
+      };
+
+      document.getElementById('cartBtn')?.addEventListener('click', () => window.location.href='cart.html');
+    }
+
+    render();
+  });
+  </script>
+</body>
+</html>
